@@ -1,0 +1,78 @@
+<!-- <p-card styleClass="dynamic-form-card" class="flex justify-content-center" >
+    <div class="text-center ">{{data.title}}</div>
+    <div class="text-center">
+
+
+        <form [formGroup]="dynamicForm" (ngSubmit)="saveForm()" novalidate>
+
+    
+            <div class="field" *ngFor="let que of data.survey" [ngSwitch]="que.answertype">
+                <label class="inline-block">{{que.question}}</label>
+                <textarea pInputTextArea *ngSwitchCase="'text'" formControlName="{{que.answertype}}"></textarea>
+                <p-button label="Submit" type="submit">
+        
+                </p-button>
+            </div>
+        </form>
+
+    </div>
+    
+
+</p-card> -->
+
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">{{data.title}}</h5>
+        <form [formGroup]="dynamicForm" (ngSubmit)="saveForm()" novalidate>
+            <div class="field" *ngFor="let que of data.survey" [ngSwitch]="que.answertype">
+                <p class="card-text">{{que.question}}</p>
+                <div *ngSwitchCase="'text'">
+                    <textarea pInputTextArea name="{{que.answertype}}" cols="40%"
+                        placeholder="write your answer?"></textarea>
+                    <br>
+                </div>
+
+
+                <form *ngSwitchCase="'single'">
+                    <div *ngFor="let item of que.options">
+                        <input type="radio" name="radio"> &nbsp; {{ item }}
+                    </div><br>
+                </form>
+
+
+                <form *ngSwitchCase="'multiple'">
+                    <div *ngFor="let item of que.options">
+                        <input type="checkbox"> &nbsp; {{item}}
+                    </div><br>
+                </form>
+
+                <button type="button" class="btn btn-primary">Save</button>
+                <hr>
+            </div>
+            <br>
+            <button type="button" class="btn btn-primary">Final Submit</button>
+        </form>
+
+    </div>
+</div>
+
+
+
+
+
+<!-- <p>{{data.survey[0].question}}</p>
+<p>{{data.survey[0].answertype}}</p>
+ -->
+<!-- <div>
+
+    <h2><p>Understanding with Ng For loop</p></h2>    
+    <h3><p>{{data.survey[0].question}}</p></h3>    
+        
+    <ul>    
+        <li *ngFor='let que of data.survey;'>    
+          {{que.question}}  
+        </li> 
+    </ul>
+
+</div> -->

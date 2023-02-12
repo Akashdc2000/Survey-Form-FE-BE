@@ -1,0 +1,38 @@
+{
+    "_id": "63e495f95ae0366c8c2b88ac",
+    "userid": "63e3dbb121c389e06ed7c40c",
+    "title": "New Survey adding UserId",
+    "email": "akash@gmail.com",
+    "survey": [
+        {
+            "question": "What is your Name?",
+            "answertype": "text",
+            "options": [
+                "ZZZ"
+            ]
+        },
+        {
+            "question": "Select Many?",
+            "answertype": "multiple",
+            "options": [
+                "one",
+                "two",
+                "three",
+                "four"
+            ]
+        },
+        {
+            "question": "Select one?",
+            "answertype": "single",
+            "options": [
+                "one",
+                "two",
+                "three",
+                "four"
+            ]
+        }
+    ],
+    "createdAt": "2023-02-09T06:43:05.354Z",
+    "updatedAt": "2023-02-09T06:43:05.354Z",
+    "__v": 0
+}
