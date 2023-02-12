@@ -122,6 +122,23 @@ const deleteUser = async (request, response) => {
     }
 }
 
+
+//Get Userid by a Email
+
+const getUserID = async (request, response) => {
+    try {
+        const result = await userModel.findOne({email:request.body.email});
+        if(result)
+            response.status(200).json({user_id:result._id})
+        else
+            response.status(201).json({message:"No User ID Found "})
+    } catch (error) {
+        response.status(200).json(error)
+    }
+}
+
+
+
 module.exports = {
-    getall, register, update, login, deleteUser
+    getall, register, update, login, deleteUser,getUserID
 }

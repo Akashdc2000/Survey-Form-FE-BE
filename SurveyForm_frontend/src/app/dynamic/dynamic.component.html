@@ -23,13 +23,13 @@
 
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title text-center">{{data.title}}</h5>
+        <h3 class="card-title text-center">{{data.title}}</h3><br><br>
         <form [formGroup]="dynamicForm" (ngSubmit)="saveForm()" novalidate>
             <div class="field" *ngFor="let que of data.survey" [ngSwitch]="que.answertype">
-                <p class="card-text">{{que.question}}</p>
+                <h5 class="card-text">{{que.question}}</h5>
                 <div *ngSwitchCase="'text'">
                     <textarea pInputTextArea name="{{que.answertype}}" cols="40%"
-                        placeholder="write your answer?"></textarea>
+                        placeholder="write your answer here"></textarea>
                     <br>
                 </div>
 
@@ -51,6 +51,7 @@
                 <hr>
             </div>
             <br>
+            <input type="checkbox" name="decleration" id="decleration" checked> Send Response Copy to Me <br>
             <button type="button" class="btn btn-primary">Final Submit</button>
         </form>
 

@@ -8,9 +8,12 @@ import { RootObject } from './dynamic/dynamic.component';
 
 export class AllservicesService {
 
+  //Constructor...
   constructor(
     private httpClient: HttpClient
   ) { }
+
+
 
   //Register User
   registerUser(userObj: any) {
@@ -22,6 +25,9 @@ export class AllservicesService {
       { headers: httpHeaders })
   }
 
+
+
+
   //Get All Users
   async getAllUsers() {
     let httpHeaders = new HttpHeaders({
@@ -29,6 +35,20 @@ export class AllservicesService {
     })
     return await this.httpClient.get('http://localhost:7777/users/getall')
   }
+
+
+
+
+  //Get a User ID By its Email...
+  getUserIDByEmail(emai: any) {
+    let httpHeaders = new HttpHeaders({
+      'content-Type': 'application/json'
+    })
+    return this.httpClient.post('http://localhost:7777/users/get',
+      emai,
+      { headers: httpHeaders })
+  }
+
 
 
   //Login request...
@@ -41,25 +61,30 @@ export class AllservicesService {
       { headers: httpHeaders });
   }
 
-//Add Servey Structure to Database
+
+
+
+  //Add Servey Structure to Database
   createSurvey(surveyObj: any) {
     let httpHeaders = new HttpHeaders({
       'content-Type': 'application/json'
     })
     return this.httpClient.post('http://localhost:7777/survey/addsurvey',
-    surveyObj,
+      surveyObj,
       { headers: httpHeaders });
   }
 
 
-  // //All Survey Created By User
-  // getAllSurveyofUser(user_id: any) {
-  //   let httpHeaders = new HttpHeaders({
-  //     'content-Type': 'application/json'
-  //   })
-  //   return this.httpClient.get(`http://localhost:7777/survey/${survey_id}`,
-  //     { headers: httpHeaders })
-  // }
+
+  //All Survey Created By User
+  getAllSurveyofUser(user_id: any) {
+    let httpHeaders = new HttpHeaders({
+      'content-Type': 'application/json'
+    })
+    return this.httpClient.get(`http://localhost:7777/survey/get/${user_id}`,
+      { headers: httpHeaders })
+  }
+
 
 
   //Fetch induvisual Survey From Database for recording Response..
@@ -74,6 +99,7 @@ export class AllservicesService {
 
 
 
+
   //Fetch Survey ID
   getSurveyID(survey: any) {
     let httpHeaders = new HttpHeaders({
@@ -83,7 +109,6 @@ export class AllservicesService {
       survey,
       { headers: httpHeaders })
   }
-
 
 
 
