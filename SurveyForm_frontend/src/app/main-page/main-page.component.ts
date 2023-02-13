@@ -4,8 +4,7 @@ import { FormBuilder,FormGroup, FormArray,FormControl, RequiredValidator, Valida
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { MatFormField } from '@angular/material/form-field';
 import { HttpClient } from '@angular/common/http';
-// import {Survey}  from  "../model/Survey";
-// import {Question} from "../model/Question";
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -32,6 +31,8 @@ export class MainPageComponent {
   //     type: 'text'
   //   }
   // ]
+
+  text : any ;
   surveyform=[
     {
       type:'',
@@ -99,6 +100,10 @@ public userForm: FormGroup;
 
   onDelete(item: any): void {
     this.addressArray.removeAt(item);
+  }
+
+  display(){
+    console.log("h");
   }
 
   onSave(){

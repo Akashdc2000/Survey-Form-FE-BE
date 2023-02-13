@@ -1,54 +1,53 @@
-<div class="container">
-<form class="border p-3 rounded-3" (ngSubmit)="logInUser()" >
-
-    <div class="row g-0">
-        <div class="col text-center p-2 mb-3 bg-light">
-            <span class="fs-3">Login</span>
+<div class="body">
+    <div class="container">
+    <form class="border p-3 rounded-3 bg-light">
+    
+        <div class="row g-0">
+            <div class="col text-center p-2 mb-3 ">
+                <span class=" login fs-3">Login</span>
+            </div>
         </div>
-    </div>
- 
-        <!-- <div class="profileImg">
-          <img src="../assets/courses/icon.png" alt="Avatar" class="avatar" width="100px">
-        </div> -->
+     
+            <!-- <div class="profileImg">
+              <img src="../assets/courses/icon.png" alt="Avatar" class="avatar" width="100px">
+            </div> -->
+            
+            <div class="row">
+    
+                <div class="col mb-3">
+                    <input type="email" 
+              placeholder="Enter Email"
+              class="form-control" 
+              name="email" 
+              [(ngModel)]="email" /> 
+            </div>
+        </div>
         
-        <div class="row">
-
-            <div class="col mb-3">
-                <input type="email" 
-          placeholder="Enter Email"
-          class="form-control" 
-          name="email" 
-          [(ngModel)]="email" /> 
+            <div class="row">
+             <!-- <label for="inputPassword">Password</label> -->
+             <div class="col">
+                <input
+            type="password"
+            placeholder="Enter Password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="password"/>
+           </div>
+           
+    
+        </div>
+          
+          <div class="row loginbtn p-2 ">
+            <div class="col-6 offset-3">
+                <div class="d-grid">
+            <button type="submit" routerLink="/main-page" class="btn btn-primary" (click)="logInUser()">Log in</button>
         </div>
     </div>
-    
-        <div class="row">
-         <!-- <label for="inputPassword">Password</label> -->
-         <div class="col">
-            <input
-        type="password"
-        placeholder="Enter Password"
-        class="form-control"
-        name="password"
-        [(ngModel)]="password"/>
-       </div>
-       
-
     </div>
-      
-      <div class="row loginbtn p-2 ">
-        <div class="col-6 offset-3">
-            <div class="d-grid">
-        <!-- <button type="submit" routerLink="/main-page" class="btn btn-primary" (click)="logInUser()">Log in</button> -->
-        <button type="submit"  class="btn btn-primary" >Log in</button>
-    </div>
-</div>
-</div>
-
-<div class="register">
-   <p>Don't have an account? <a routerLink="/register">Register Here</a> </p>
     
-</div>
-</form>
-</div>
-
+    <div class="register">
+       <p>Don't have an account? <a routerLink="/register">Register Here</a> </p>
+    </div>
+    </form>
+    </div>
+    </div>
