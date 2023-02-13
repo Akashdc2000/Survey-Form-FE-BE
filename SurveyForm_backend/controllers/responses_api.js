@@ -20,17 +20,21 @@ const getall = async (request, response) => {
 //Get Response By a Title/Name
 const getResponseBySurveyId = async (request, response) => {
     try {
-        const survey_id = request.params._id;
+        const survey_id = request.params.surveyid;
         const result = await responseModel.find({ survey_id:survey_id });
         if (result.length <= 0)
-            response.status(404).json({ message: "No response Found..." })
+            {
+                // console.log("no")
+                response.status(200).json({ message: "No response Found..." })
+            }
         else
             response.status(200).json({
                 message: `Total ${result.length} Responses`,
                 "Responses": result
             })
     } catch (error) {
-        response.send(error)
+        // console.log("catch")
+        response.status(200).json({ message: "No response Found..." })
     }
 }
 

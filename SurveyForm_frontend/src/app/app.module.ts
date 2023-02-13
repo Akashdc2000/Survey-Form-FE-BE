@@ -12,6 +12,16 @@ import { SigninComponent } from './components/signin/signin.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { DynamicComponent } from './dynamic/dynamic.component';
 import { SurveyComponent } from './survey/survey.component';
+import { HistoryComponent } from './history/history.component';
+import { SurveyResponsesComponent } from './survey-responses/survey-responses.component';
+import { LoaderComponent } from './loader/loader.component';
+
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { HeaderComponent } from './header/header.component';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldControl } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -22,6 +32,10 @@ import { SurveyComponent } from './survey/survey.component';
     MainPageComponent,
     DynamicComponent,
     SurveyComponent,
+    HistoryComponent,
+    SurveyResponsesComponent,
+    LoaderComponent,
+    HeaderComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -30,7 +44,10 @@ import { SurveyComponent } from './survey/survey.component';
     FormsModule,
     DragDropModule,
     HttpClientModule,
-    IonicModule
+    IonicModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule
   
   ],
   providers: [],

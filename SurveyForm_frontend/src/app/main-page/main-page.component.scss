@@ -1,31 +1,38 @@
-#container{
-    display:grid;
-    height: 100vh;
-    grid-template-columns: 20% 80%;
-    margin: 0%;
-    padding-right: 0%;
-    background-color: rgba(205, 201, 201, 0.453);
-    
-    .page1{
-        background-color: rgb(255, 255, 255);
-        margin-left:10px;
-        align-items: start;
-        margin-right: 10px;
-    }
-    .page2{
-        background-color: rgb(255, 255, 255);
-    }
+*{
+  margin: 0;
+  padding: 0;
+}
+.h2{
+  justify-content: center;
+  text-align: center;
+  margin-top:10px;
+  margin-bottom:-2px;
+}
+
+.toolbar{
+  background-color: #bdcddc;
+  text-decoration: solid;
+  color:azure;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 .example-container {
     width: 400px;
     max-width: 100%;
-    margin: 0 25px 25px 0;
+    margin: 50px ;
     display: inline-block;
     vertical-align: top;
+    margin-bottom: 100px;
+    // padding-left: 50px;
+    background-color: rgb(188, 188, 188);
+    // jutsify-content: center;
+    // text-align: center;
+    border-radius:5px;
+
   }
   
   .example-list {
-    border: solid 1px #ccc;
+    border: solid 3px #9f9c9c;
     min-height: 60px;
     background: white;
     border-radius: 4px;
@@ -70,4 +77,25 @@
   .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   }
-  
+
+  .address-container{
+    justify-content: center;
+    align-items:center;
+
+  }
+
+  .fullPage{
+    background-color: #b3d9ff;
+    padding-bottom: 280px;
+  }
+  .deletebtn{
+    margin-left: 8em;
+    padding:3px;
+    border-radius: 1px;
+  }
+  .addbtn{
+    align-items: end;
+    padding:3px;
+    border-radius: 1px;
+    margin:9px;
+  }

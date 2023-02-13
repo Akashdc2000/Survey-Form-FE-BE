@@ -1,85 +1,149 @@
+<app-header></app-header>
 
-
-<div cdkDropListGroup>
-    <div class="example-container">
-      <h2>components</h2>
+<div cdkDropListGroup class="fullPage">
   
-      <div
-        cdkDropList
-        [cdkDropListData]="components"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of components" cdkDrag>{{item}}</div>
+  <div class="example-container">
+    <div class="h2">
+    <h2>components</h2></div>
+    <div cdkDropList [cdkDropListData]="components" class="example-list">
+      <div class=" item example-box" *ngFor="let item of components" cdkDrag>
+        {{item}}
       </div>
     </div>
-  
-    <div class="example-container" >
-      <h2>Form</h2>
-      <div
-        cdkDropList
-        [cdkDropListData]="Form"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        
-        <div *ngFor="let item of Form" cdkDrag >
-          
-          <div *ngIf="item==='Text Area'">
-            <!-- <label for="">Que </label> -->
-            <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
-            <div><input type="text" placeholder="Enter Your Question"> </div> <br>
-            <div><input type="text"></div>
-            <button mat-raised-button color="primary">Save</button><hr>
-          </div>
-          
-        
-          
-
-          <div *ngIf="item==='Single Choice Question'">
-            <!-- <label for="">Single Choice Anwser</label> <br> -->
-            <div>
-            <!-- <label for="">Que: </label> -->
-            <input type=" text" placeholder="Enter Your Question"><br> 
-          </div> <br>
-
-            <div>
-           <input type="radio" name="ch" id="" >
-           <input type="text" placeholder="Option">
-           </div> <br>
-
-           <div>
-            <input type="radio" name="ch" id="" >
-            <input type="text" placeholder="Option">
-            </div> <hr>
-           <!-- <input type="radio" name="ch" id=""> Op 2 <br> -->
-           <!-- <input type="radio" name="ch" id=""> Op 3 -->
-          </div>
-
-
-          <div *ngIf="item==='Multiple Choice Question'">
-            <div>
-              <!-- <label for="">Que: </label> -->
-              <input type=" text" placeholder="Enter Your Question"><br> 
-            </div> <br>
-
-            <div>
-              <input type="checkbox" name="ch" id="" >
-              <input type="text" placeholder="Option">
-              </div> <br>
-              <div>
-                <input type="checkbox" name="ch" id="" >
-                <input type="text" placeholder="Option">
-                </div> <br>
+  </div>
+  <div class="example-container">
+    <div class="h2">
+    <h2>Form</h2></div>
+    <div 
+      cdkDropList
+      [cdkDropListData]="Form"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <!-- Text Area -->
+      <div *ngFor="let item of Form" cdkDrag>
+        <div *ngIf="item === 'Text Area'">
+          <br />
+          <form class="example-form" [formGroup]="userForm">
+            <div
+              class="address-container"
+              *ngFor="let group of addressArray.controls; let i = index"
+              formArrayName="address"
+            >
+              <div class="form-group jumbotron" [formGroupName]="i">
                 <div>
-                  <input type="checkbox" name="ch" id="" >
-                  <input type="text" placeholder="Option">
-                  </div> <hr>
-            <!-- <label for="">Multiple Choice Question</label> <br> -->
-            <!-- <input type="checkbox" name="multiple" id="">Op 1 <br>
-            <input type="checkbox" name="multiple" id="">Op 1 <br>
-            <input type="checkbox" name="multiple" id="">Op 1 -->
+                  <input value="text" type="text" placeholder="Enter Your Question" />
+                  
+                  <!-- <button
+                    *ngIf="i > 0"
+                    class="btn btn-danger float-end mb-1"
+                    (click)="removeAddress(i)"
+                  >
+                    Remove button
+                  </button> -->
+                </div>
+                <br />
+              </div>
+            </div>
+            <div class="form-row org-desc-parent-margin">
+              <!-- <button class="btn btn-primary" (click)="addAddress1()">
+                Add More option+
+              </button> -->
+              
+                <button (click)="onDelete(item)" class="deletebtn btn-primary" > Delete</button>
+                  <button class="addbtn btn-primary" (click)="onSave()"> Save</button>
+                
+            </div>
+          
+          </form>
+          <hr />
+          
+        </div><br>
+        
 
+        <!-- single choice question -->
+
+        <div *ngIf="item === 'Single Choice Question'">
+          <div>
+            <input type=" text" placeholder="Enter Your Question" /> <br />
           </div>
+          <br />
+          <form class="example-form" [formGroup]="userForm">
+            <div
+              class="address-container"
+              *ngFor="let group of addressArray.controls; let i = index"
+              formArrayName="address"
+            >
+              <div class="form-group jumbotron" [formGroupName]="i">
+                <div>
+                  <input type="radio" name="ch" id="" />
+                  <input type="text" placeholder="Option" />
+
+                  <button
+                    *ngIf="i > 0"
+                    class="btn btn-danger float-end mb-1"
+                    (click)="removeAddress(i)"
+                  >
+                    Remove button
+                  </button>
+                  
+                </div>
+                <br/>
+                
+              </div>
+            </div>
+            <div class="form-row org-desc-parent-margin">
+              <button class="btn btn-primary" (click)="addAddress2()">
+                Add More option+
+              </button>
+              <button (click)="onDelete(item)" class="deletebtn btn-primary" > Delete</button>
+                  <button class="addbtn btn-primary" (click)="onSave()"> Save</button>
+            </div>
+          </form>
+          <hr/>
+        </div>
+
+
+        <!-- Multiple choice question -->
+
+        <div *ngIf="item === 'Multiple Choice Question'">
+          <div>
+            <input class="" type=" text" placeholder="Enter Your Question" /><br />
+          </div>
+          <br />
+          <form class="example-form" [formGroup]="userForm">
+            <div
+              class="address-container"
+              *ngFor="let group of addressArray.controls; let j = index"
+              formArrayName="address"
+            >
+              <div class="form-group jumbotron" [formGroupName]="j">
+                <div>
+                  <input type="checkbox" name="ch" id="" />
+                  <input type="text" placeholder="Option" />
+
+                  <button
+                    *ngIf="j > 0"
+                    class="btn btn-danger float-end mb-1"
+                    (click)="removeAddress(j)"
+                  >
+                    Remove button
+                  </button>
+                </div>
+                <br />
+              </div>
+            </div>
+            <div class="form-row org-desc-parent-margin">
+              <button class="btn btn-primary" (click)="addAddress1()">
+                Add More option+
+              </button>
+              <button (click)="onDelete(item)" class="deletebtn btn-primary" > Delete</button>
+              <button class="addbtn btn-primary" (click)="onSave()"> Save</button>
+            </div>
+          </form>
+          <hr/>
         </div>
       </div>
     </div>
   </div>
+</div>
+<!-- </div> -->

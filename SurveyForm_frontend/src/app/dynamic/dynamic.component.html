@@ -1,25 +1,3 @@
-<!-- <p-card styleClass="dynamic-form-card" class="flex justify-content-center" >
-    <div class="text-center ">{{data.title}}</div>
-    <div class="text-center">
-
-
-        <form [formGroup]="dynamicForm" (ngSubmit)="saveForm()" novalidate>
-
-    
-            <div class="field" *ngFor="let que of data.survey" [ngSwitch]="que.answertype">
-                <label class="inline-block">{{que.question}}</label>
-                <textarea pInputTextArea *ngSwitchCase="'text'" formControlName="{{que.answertype}}"></textarea>
-                <p-button label="Submit" type="submit">
-        
-                </p-button>
-            </div>
-        </form>
-
-    </div>
-    
-
-</p-card> -->
-
 
 <div class="card">
     <div class="card-body">
@@ -27,8 +5,8 @@
         <form [formGroup]="dynamicForm" (ngSubmit)="saveForm()" novalidate>
             <div class="field" *ngFor="let que of data.survey" [ngSwitch]="que.answertype">
                 <h5 class="card-text">{{que.question}}</h5>
-                <div *ngSwitchCase="'text'">
-                    <textarea pInputTextArea name="{{que.answertype}}" cols="40%"
+                <div *ngSwitchCase="'text'" name="answertype">
+                    <textarea pInputTextArea name="options" cols="40%"
                         placeholder="write your answer here"></textarea>
                     <br>
                 </div>
@@ -62,18 +40,3 @@
 
 
 
-<!-- <p>{{data.survey[0].question}}</p>
-<p>{{data.survey[0].answertype}}</p>
- -->
-<!-- <div>
-
-    <h2><p>Understanding with Ng For loop</p></h2>    
-    <h3><p>{{data.survey[0].question}}</p></h3>    
-        
-    <ul>    
-        <li *ngFor='let que of data.survey;'>    
-          {{que.question}}  
-        </li> 
-    </ul>
-
-</div> -->

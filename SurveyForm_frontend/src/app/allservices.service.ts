@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { from } from 'rxjs'
 import { RootObject } from './dynamic/dynamic.component';
+import { HistoryRootObject } from './history/history.component';
+import { ResponsesRootObject } from './survey-responses/survey-responses.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -81,7 +83,7 @@ export class AllservicesService {
     let httpHeaders = new HttpHeaders({
       'content-Type': 'application/json'
     })
-    return this.httpClient.get(`http://localhost:7777/survey/get/${user_id}`,
+    return this.httpClient.get<HistoryRootObject>(`http://localhost:7777/survey/get/${user_id}`,
       { headers: httpHeaders })
   }
 
@@ -110,6 +112,19 @@ export class AllservicesService {
       { headers: httpHeaders })
   }
 
+  //Delete Survey By Survey ID
+  deleteSurveyBySurveyID(survey_id:any){
+    return this.httpClient.delete(`http://localhost:7777/survey/delete/${survey_id}`);
+  }
+
+
+  //Responses Services 
+
+  //Get all responses by SurveyID
+
+  getAllResponsesBySurveyID(survey_id:any){
+    return this.httpClient.get<ResponsesRootObject>(`http://localhost:7777/responses/get/${survey_id}`);
+  }
 
 
 }

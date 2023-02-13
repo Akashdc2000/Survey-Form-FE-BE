@@ -8,7 +8,7 @@ router.get('/', (request, response) => {
 })
 
 router.get('/getall', getall)
-router.get('/get/:_id', getResponseBySurveyId)
+router.get('/get/:surveyid', getResponseBySurveyId)
 router.post('/addresponse/:_id', addResponse)
 router.put("/update/:_id", updateResponse)
 router.delete("/delete/:_id", deleteResponse)

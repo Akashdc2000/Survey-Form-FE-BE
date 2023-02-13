@@ -1,0 +1,47 @@
+@use 'sass:color';
+// @import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap');
+
+$primary: #ed9ded;
+$secondary: color.scale($primary, $lightness: -50%);
+
+:host {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary;
+
+    font: {
+
+        font-family: 'Bungee Inline' cursive;
+        size: 3rem;
+    }
+
+    color:$secondary;
+    letter-spacing: 1rem;
+    user-select: none;
+
+    span {
+
+        animation: animate var(--duration) var(--delay);
+    }
+}
+
+@keyframes animate {
+    0% {
+        opacity: 0;
+        transform: translateY(0) rotateZ(180deg);
+    }
+
+    25% {
+        opacity: 1;
+        transform: translateY(-1rem) scale(1.5) rotateZ(360deg);
+        text-shadow: 0 1rem 0.5rem #000;
+        letter-spacing: 2rem;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(0) rotateZ(360deg);
+    }
+}
