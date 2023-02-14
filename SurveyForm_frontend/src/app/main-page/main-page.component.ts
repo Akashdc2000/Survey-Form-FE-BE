@@ -106,14 +106,5 @@ public userForm: FormGroup;
     console.log("h");
   }
 
-  onSave(){
-    // console.log(this.surveyform)
-      // localStorage.setItem(data);
-
-      const data = JSON.parse(localStorage.getItem('data') || '{}');    
-      localStorage.setItem('key', JSON.stringify(this.surveyform));
-           console.log(this.surveyform)
-
-  }
 
 }

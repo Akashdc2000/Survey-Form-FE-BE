@@ -1,7 +1,7 @@
 const userModel = require('../models/users_model')
 
-
 const bcrypt = require('bcrypt');
+const { generateToken } = require('../middleware/auth');
 const saltRounds = 10;
 
 
@@ -64,7 +64,10 @@ const login = async (request, response) => {
     if (!matchPassword) {
         return response.status(200).json({ message: 'Invalid Credentials' });
     }
-    response.status(200).json({ message: "authorized" })
+    //Generate Token
+    let token= await generateToken(request);
+    console.log(token)
+    response.status(200).json({ message: "authorized",token:token })
 }
 
 

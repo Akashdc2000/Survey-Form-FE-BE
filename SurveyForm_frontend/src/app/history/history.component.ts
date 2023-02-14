@@ -40,6 +40,10 @@ export class HistoryComponent implements OnInit{
   }
 
   ngOnInit() {
+
+      if(!localStorage.getItem('token'))
+        this.route.navigate(['/signin']);
+
     //To get a UserID from URL
     this.url = (this.route.routerState.snapshot.url)
     this.userID = this.url.split('/')[2]

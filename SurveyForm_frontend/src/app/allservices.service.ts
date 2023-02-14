@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { from } from 'rxjs'
+
 import { RootObject } from './dynamic/dynamic.component';
 import { HistoryRootObject } from './history/history.component';
 import { ResponsesRootObject } from './survey-responses/survey-responses.component';
@@ -9,7 +9,12 @@ import { ResponsesRootObject } from './survey-responses/survey-responses.compone
 })
 
 export class AllservicesService {
-
+  public token:string|null=localStorage.getItem('token');
+  public httpHeaders = new HttpHeaders({
+    'content-Type': 'application/json',
+    'authorization': ""+this.token
+  })
+  
   //Constructor...
   constructor(
     private httpClient: HttpClient
@@ -19,12 +24,13 @@ export class AllservicesService {
 
   //Register User
   registerUser(userObj: any) {
-    let httpHeaders = new HttpHeaders({
-      'content-Type': 'application/json'
-    })
+    // let httpHeaders = new HttpHeaders({
+    //   'content-Type': 'application/json',
+    //   'authorization': ""+this.token
+    // })
     return this.httpClient.post('http://localhost:7777/users/register',
       userObj,
-      { headers: httpHeaders })
+      { headers: this.httpHeaders })
   }
 
 
@@ -32,35 +38,35 @@ export class AllservicesService {
 
   //Get All Users
   async getAllUsers() {
-    let httpHeaders = new HttpHeaders({
-      'content-Type': 'application/json'
-    })
-    return await this.httpClient.get('http://localhost:7777/users/getall')
+
+    return  this.httpClient.get('http://localhost:7777/users/getall')
   }
 
 
 
 
   //Get a User ID By its Email...
-  getUserIDByEmail(emai: any) {
-    let httpHeaders = new HttpHeaders({
-      'content-Type': 'application/json'
-    })
+  getUserIDByEmail(email: any) {
+    // let httpHeaders = new HttpHeaders({
+    //   'content-Type': 'application/json',
+    //   'authorization': ""+this.token
+    // })
     return this.httpClient.post('http://localhost:7777/users/get',
-      emai,
-      { headers: httpHeaders })
+      email,
+      { headers: this.httpHeaders })
   }
 
 
 
   //Login request...
   login(userObj: any) {
-    let httpHeaders = new HttpHeaders({
-      'content-Type': 'application/json'
-    })
+    // let httpHeaders = new HttpHeaders({
+    //   'content-Type': 'application/json',
+    //   'authorization': ""+this.token
+    // })
     return this.httpClient.post('http://localhost:7777/users/login',
       userObj,
-      { headers: httpHeaders });
+      { headers: this.httpHeaders });
   }
 
 
@@ -68,34 +74,39 @@ export class AllservicesService {
 
   //Add Servey Structure to Database
   createSurvey(surveyObj: any) {
-    let httpHeaders = new HttpHeaders({
-      'content-Type': 'application/json'
-    })
+    
+    console.log(this.token);
+    // let httpHeaders = new HttpHeaders({
+    //   'content-Type': 'application/json',
+    //   'authorization': ""+this.token
+    // })
     return this.httpClient.post('http://localhost:7777/survey/addsurvey',
       surveyObj,
-      { headers: httpHeaders });
+      { headers: this.httpHeaders });
   }
 
 
 
   //All Survey Created By User
   getAllSurveyofUser(user_id: any) {
-    let httpHeaders = new HttpHeaders({
-      'content-Type': 'application/json'
-    })
+    // let httpHeaders = new HttpHeaders({
+    //   'content-Type': 'application/json',
+    //   'authorization': ""+this.token
+    // })
     return this.httpClient.get<HistoryRootObject>(`http://localhost:7777/survey/get/${user_id}`,
-      { headers: httpHeaders })
+      { headers: this.httpHeaders })
   }
 
 
 
   //Fetch induvisual Survey From Database for recording Response..
   getSurveyStructure(survey_id: any) {
-    let httpHeaders = new HttpHeaders({
-      'content-Type': 'application/json'
-    })
+    // let httpHeaders = new HttpHeaders({
+    //   'content-Type': 'application/json',
+    //   'authorization': ""+this.token
+    // })
     return this.httpClient.get<RootObject>(`http://localhost:7777/survey/${survey_id}`,
-      { headers: httpHeaders });
+      { headers: this.httpHeaders });
   }
 
 
@@ -104,17 +115,22 @@ export class AllservicesService {
 
   //Fetch Survey ID
   getSurveyID(survey: any) {
-    let httpHeaders = new HttpHeaders({
-      'content-Type': 'application/json'
-    })
+    // let httpHeaders = new HttpHeaders({
+    //   'content-Type': 'application/json',
+    //   'authorization': ""+this.token
+    // })
     return this.httpClient.post(`http://localhost:7777/survey/get`,
       survey,
-      { headers: httpHeaders })
+      { headers: this.httpHeaders })
   }
 
   //Delete Survey By Survey ID
   deleteSurveyBySurveyID(survey_id:any){
-    return this.httpClient.delete(`http://localhost:7777/survey/delete/${survey_id}`);
+    // let httpHeaders = new HttpHeaders({
+    //   'content-Type': 'application/json',
+    //   'authorization': ""+this.token
+    // })
+    return this.httpClient.delete(`http://localhost:7777/survey/delete/${survey_id}`,{headers:this.httpHeaders});
   }
 
 
@@ -123,7 +139,7 @@ export class AllservicesService {
   //Get all responses by SurveyID
 
   getAllResponsesBySurveyID(survey_id:any){
-    return this.httpClient.get<ResponsesRootObject>(`http://localhost:7777/responses/get/${survey_id}`);
+    return this.httpClient.get<ResponsesRootObject>(`http://localhost:7777/responses/get/${survey_id}`,{headers:this.httpHeaders});
   }
 
 

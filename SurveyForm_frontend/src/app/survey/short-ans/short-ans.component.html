@@ -1,0 +1,18 @@
+<form [formGroup]="surveyForm">
+  <div class="example-full-width" formArrayName="question">
+
+   <h3>Question</h3>
+  <div *ngFor="let que of questions.controls;let i =index">
+    <div>Question{{i+1}}</div>
+    <input
+      type = text;
+      [formControlName]="i"
+      placeholder="Enter your question"      
+    />
+  </div>
+  <button (click)="addNewQuestion()" >Add New Question</button>
+  <button type="button" (click)="removeQuestion()" >- Remove Last Question</button>
+  <!-- <button (click)="getValue()">submit</button> -->
+  </div>
+
+</form>

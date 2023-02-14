@@ -37,6 +37,8 @@ export class SurveyResponsesComponent implements OnInit {
   ) {
   }
   ngOnInit(): void {
+    if(!localStorage.getItem('token'))
+        this.route.navigate(['/signin']);
 
     //To get a SurveyID from URL
     this.url = (this.route.routerState.snapshot.url)

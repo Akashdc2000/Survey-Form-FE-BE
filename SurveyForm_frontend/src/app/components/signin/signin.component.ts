@@ -24,10 +24,12 @@ export class SigninComponent {
     try {
       this.allservices.login({ email: this.email, password: this.password }).subscribe(data => {
         console.log(data)
-        let response=JSON.parse(JSON.stringify(data)).message
+        let response=JSON.parse(JSON.stringify(data))
         console.log(response)
-        if(response=="authorized")
+        if(response.message=="authorized")
         {
+          localStorage.setItem('token',response.token)
+          console.log(response.token)
           alert("Login Successfully Done")
           this.router.navigate(['/mainpage']);
         }

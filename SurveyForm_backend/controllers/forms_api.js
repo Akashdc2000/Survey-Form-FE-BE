@@ -53,7 +53,7 @@ const getIndivisualSurvey = async (request, response) => {
 const createSurvey = async (request, response) => {
 
     const { title, email, survey } = request.body;
-
+    console.log('ok')
     const existingUser = await userModel.findOne({ email: email })
     if (!existingUser) {
         response.status(409).json({ message: "You are not Authorized User" })
