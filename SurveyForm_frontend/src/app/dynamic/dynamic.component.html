@@ -2,6 +2,50 @@
 <div class="card">
     <div class="card-body">
         <h3 class="card-title text-center">{{data.title}}</h3><br><br>
+        <form #form="ngForm" (ngSubmit)="saveForm(form)" novalidate>
+            <div class="field" *ngFor="let que of data.survey;let i=index" [ngSwitch]="que.answertype">
+                <div>
+                    <h3 ngModel class="card-text">{{que.question}}</h3>
+                </div>
+
+                <div *ngSwitchCase="'text'">
+                    <textarea ngModel name={{i}} cols="40%" placeholder="write your answer here"></textarea>
+                    <br>
+                </div>
+                <hr>
+                <div *ngSwitchCase="'single'">
+                    <div *ngFor="let item of que.options">
+                        <input type="radio" name={{i}} value={{item}} ngModel> &nbsp; {{ item }}
+                    </div><br>
+                </div>
+                <hr>
+
+                <div *ngSwitchCase="'multiple'">
+                    <div *ngFor="let item of que.options;let j = index">
+                        <input type="checkbox" name="checkbox" value={{item}} ngModel> &nbsp; {{ item }}
+                    </div><br>
+                </div>
+                <hr>
+            </div>
+            <br>
+            <input type="checkbox" name="decleration" id="decleration" checked> Send Response Copy to Me <br>
+            <button type="submit" class="btn btn-primary">Final Submit</button>
+        </form>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- 
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title text-center">{{data.title}}</h3><br><br>
         <form [formGroup]="dynamicForm" (ngSubmit)="saveForm()" novalidate>
             <div class="field" *ngFor="let que of data.survey" [ngSwitch]="que.answertype">
                 <h5 class="card-text">{{que.question}}</h5>
@@ -30,7 +74,7 @@
             </div>
             <br>
             <input type="checkbox" name="decleration" id="decleration" checked> Send Response Copy to Me <br>
-            <button type="button" class="btn btn-primary">Final Submit</button>
+            <button type="button" class="btn btn-primary" (click)="saveForm()">Final Submit</button>
         </form>
 
     </div>
@@ -39,4 +83,4 @@
 
 
 
-
+ -->

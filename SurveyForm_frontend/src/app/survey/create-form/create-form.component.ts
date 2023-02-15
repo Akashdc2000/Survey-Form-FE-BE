@@ -40,8 +40,8 @@ export class RootObject {
 
 @Component({
   selector: 'app-create-form',
-  templateUrl: 'create-form.component.html',
-  styleUrls: ['create-form.component.scss'],
+  templateUrl: './create-form.component.html',
+  styleUrls: ['./create-form.component.scss'],
 })
 export class CreateFormComponent implements OnInit{
 
@@ -186,5 +186,20 @@ export class CreateFormComponent implements OnInit{
     console.log(response);
    })
 
+  }
+
+
+  history()
+  {
+
+      this.allservices.getUserIDByEmail().subscribe(response=>{
+        console.log(response)
+      })
+  }
+
+  logout()
+  {
+    localStorage.clear();
+    this.router.navigate(['/signin']) 
   }
 }

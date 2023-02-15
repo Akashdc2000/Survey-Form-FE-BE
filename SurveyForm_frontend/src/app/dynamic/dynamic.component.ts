@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, ɵgetUnknownElementStrictMode } from '@angular/core';
 
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AllservicesService } from '../allservices.service';
 
@@ -50,24 +50,27 @@ export class DynamicComponent implements OnInit {
     this.allservices.getSurveyStructure(this.surveyID).subscribe((response: RootObject) => {
       // console.log(response);
       this.data = response;
-      // this.formField=response;
-      // console.log(this.formField);
-      // this.setDynamicForm();
     });
 
 
   }
 
-  setDynamicForm() {
-    // for(const control of controls)
-    // {
-    //   this.dynamicForm.addControl(control.title,this.fb.control(control.survey))
-    //   console.log(typeof controls)
-    // }
-
-    // console.log(JSON.parse(JSON.stringify(this.data.survey[0])).question)
-  }
-  saveForm() {
-    console.log(this.dynamicForm.value)
+  
+  saveForm(form:NgForm) {
+    //console.log(this.dynamicForm.value)
+    this.allservices.getSurveyStructure(this.surveyID).subscribe((response:RootObject)=>{
+      let question=response.survey;
+      console.log(question)
+      console.log(form.value)
+      let answer=Object.entries(form.value)
+    
+      let i=0;
+    
+      // question.forEach(que => {
+      //   que.options=answer[i]
+      //   i=i+1;
+      // });
+      console.log(answer)
+    })
   }
 }

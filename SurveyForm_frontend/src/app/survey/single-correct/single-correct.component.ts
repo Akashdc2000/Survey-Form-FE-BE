@@ -8,27 +8,19 @@ import { FormArray, FormBuilder, FormControl } from '@angular/forms';
   styleUrls: ['./single-correct.component.scss'],
 })
 export class SingleCorrectComponent {
-  
+
   questionControl = new FormControl('');
 
-  constructor(public fb:FormBuilder){}
+  constructor(public fb: FormBuilder) { }
 
-  // multipleChoice = this.fb.group({
-  //   multipleArray : this.fb.array([
-  //     mc_question : [''],
-  //     mc_answer : this.fb.array([
-  //       this.fb.control('')
-  //     ])
-  //   ])
-  // })
 
-  public root : any[]=[];
+  public root: any[] = [];
 
   multipleChioce = this.fb.group({
-      question : [''],
-      option : this.fb.array([
-        this.fb.control('')
-      ])
+    question: [''],
+    option: this.fb.array([
+      this.fb.control('')
+    ])
   })
 
   // onCheckboxChange(index: number) {
@@ -43,21 +35,19 @@ export class SingleCorrectComponent {
     // return this.checkboxes;
     const result = this.multipleChioce.value
     console.log(result);
-  this.root.push(result)
+    this.root.push(result)
     return result;
   }
 
-  get options()
-  {
+  get options() {
     return this.multipleChioce.get('option') as FormArray;
   }
 
-  addNewOptions(){
+  addNewOptions() {
     this.options.push(this.fb.control(''));
   }
 
-  removeOption()
-  {
-    this.options.removeAt(this.options.length-1);
+  removeOption() {
+    this.options.removeAt(this.options.length - 1);
   }
 }

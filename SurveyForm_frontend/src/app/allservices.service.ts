@@ -46,14 +46,14 @@ export class AllservicesService {
 
 
   //Get a User ID By its Email...
-  getUserIDByEmail(email: any) {
-    // let httpHeaders = new HttpHeaders({
-    //   'content-Type': 'application/json',
-    //   'authorization': ""+this.token
-    // })
+  getUserIDByEmail() {
+    let token=localStorage.getItem('token');
+    let httpHeaders = new HttpHeaders({
+      'content-Type': 'application/json',
+      'authorization': ""+token
+    })
     return this.httpClient.post('http://localhost:7777/users/get',
-      email,
-      { headers: this.httpHeaders })
+      { headers: httpHeaders })
   }
 
 
@@ -140,6 +140,11 @@ export class AllservicesService {
 
   getAllResponsesBySurveyID(survey_id:any){
     return this.httpClient.get<ResponsesRootObject>(`http://localhost:7777/responses/get/${survey_id}`,{headers:this.httpHeaders});
+  }
+
+  //add Response to database
+  saveResponse(responseObj:any,survey_id:string){
+    return this.httpClient.post(`http://localhost:7777/responses/addresponse/${survey_id}`,responseObj,{headers:this.httpHeaders})
   }
 
 

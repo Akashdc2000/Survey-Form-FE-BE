@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AllservicesService } from '../allservices.service';
-
+import * as XLSX from 'xlsx';
+import * as JsonToXML from 'js2xmlparser';
+import { FileSaverService } from 'ngx-filesaver';
+import {ngxCsv} from 'ngx-csv/ngx-csv.js';
 
 export interface Survey2 {
   question: string;
@@ -75,8 +78,67 @@ export class HistoryComponent implements OnInit{
 
   //Get All Responses
   getAllResponsesBy(survey_id:any){
+    this.downloadByCSV(survey_id);
     alert("All Responses of Survey ID "+survey_id)
     window.open(`http://localhost:4200/survey_responses/${survey_id}`)
+  }
+
+
+  //Download REsponses in Xsl Format
+  // downloadResponses(survey_id:any)
+  //   {
+  //     const EXCEL_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+  //     const EXCEL_EXTENSION=".xlsx";
+  
+  //     const worksheet = XLSX.utils.json_to_sheet(this.jsonData);
+  //     const worksheet1 = JsonToXML.parse("person",this.jsonData);
+  //     console.log(worksheet1);
+  //     // const worksheet = JsonToXML.parse(`${this.userId}` , this.jsonData);
+  
+  //     //JSON To ExcelSheet Conversion
+  //     const workbook = {
+  //       Sheets:{
+  //         'testingSheet':worksheet
+  //       },
+  //       SheetNames:['testingSheet']
+  //     }
+  
+  //     const excelBuffer =  XLSX.write(workbook,{bookType:'xlsx',type:'array'});
+  
+  //     //Download File In Excel Format
+  
+  //     const blogData = new Blob([excelBuffer],{type:EXCEL_TYPE});
+  
+  //     // // Saving File Using File Saver
+  //     this.fileSaver.save(blogData,`${this.userId}`);
+  
+  //     // console.log(Object.entries(this.jsonData));
+  
+  
+  //   }
+  
+
+  
+    downloadByCSV(survey_id:any)
+    {
+      this.allservices.getAllResponsesBySurveyID(survey_id).subscribe(response=>{
+        console.log(response.Responses);
+
+        var option ={
+          title : 'Survey Form',
+          fieldSeparator : ',',
+          quoteStrings :'"',
+          decimalseparator : '.',
+          showLabels : false,
+          noDownload : false,
+          showTitle : false,
+          useBom : false,
+          headers : ['title' , 'email',"survey:[{}]"]
+        };
+    
+        new ngxCsv(response.Responses,"report",option);
+      })
+      
   }
 
 }

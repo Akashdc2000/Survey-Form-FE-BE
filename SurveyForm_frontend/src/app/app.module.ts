@@ -42,6 +42,7 @@ import { MatCardModule } from '@angular/material/card';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +61,7 @@ import { MatCardModule } from '@angular/material/card';
     MultipleCorrectComponent,
     SingleCorrectComponent,
     ShortAnsComponent,
-    CreateFormComponent,
+    CreateFormComponent
 
   ],
   imports: [
@@ -78,7 +79,7 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
   
   ],
   providers: [],

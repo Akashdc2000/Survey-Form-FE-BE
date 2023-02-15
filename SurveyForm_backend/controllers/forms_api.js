@@ -56,7 +56,7 @@ const createSurvey = async (request, response) => {
     console.log('ok')
     const existingUser = await userModel.findOne({ email: email })
     if (!existingUser) {
-        response.status(409).json({ message: "You are not Authorized User" })
+        response.status(401).json({ message: "You are not Authorized User" })
     }
     else {
         const existingSurvey = await formsModel.findOne({ userid: existingUser._id, title: title })
