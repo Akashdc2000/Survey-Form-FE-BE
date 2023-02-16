@@ -1,45 +1,49 @@
+<div class="body">
 
-<div class="card">
-    <div class="card-body">
-        <h3 class="card-title text-center">{{data.title}}</h3><br><br>
-        <form >
-            <input type="email" [(ngModel)]="email" name="email" id="email" placeholder="Enter Your Email Here"><hr>
-        </form>
-        <form #form="ngForm" (ngSubmit)="saveForm(form)" novalidate>
-            
-            <div class="field" *ngFor="let que of data.survey;let i=index" [ngSwitch]="que.answertype">
-                <div>
-                    <h3 ngModel class="card-text">{{que.question}}</h3>
-                </div>
 
-                <div *ngSwitchCase="'text'">
-                    <textarea ngModel name={{i}} cols="40%" placeholder="write your answer here"></textarea>
-                    <br>
-                </div>
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title text-center"><u>{{data.title}}</u></h3><br><br>
+            <form>
+                <input type="email" [(ngModel)]="email" name="email" id="email" placeholder="Enter Your Email Here">
                 <hr>
-                <div *ngSwitchCase="'single'">
-                    <div *ngFor="let item of que.options">
-                        <input type="radio" name={{i}} value={{item}} ngModel> &nbsp; {{ item }}
-                    </div><br>
-                </div>
-                <hr>
+            </form>
+            <form #form="ngForm" (ngSubmit)="saveForm(form)" novalidate>
 
-                <div *ngSwitchCase="'multiple'">
-                    <div *ngFor="let item of que.options;let j = index">
-                        <input type="checkbox" name="checkbox" value={{item}} ngModel> &nbsp; {{ item }}
-                    </div><br>
-                </div>
-                <hr>
-            </div>
-            <br>
-            <input type="checkbox" name="decleration" id="decleration" checked> Send Response Copy to Me <br>
-            <button type="submit" class="btn btn-primary">Final Submit</button>
-        </form>
+                <div class="field" *ngFor="let que of data.survey;let i=index" [ngSwitch]="que.answertype">
+                    <div>
+                        <h3 ngModel class="card-text">{{que.question}}</h3>
+                    </div>
 
+                    <div *ngSwitchCase="'text'">
+                        <textarea ngModel name={{i}} cols="40%" placeholder="write your answer here"></textarea>
+                        <br>
+                        <hr>
+                    </div>
+
+                    <div *ngSwitchCase="'single'">
+                        <div *ngFor="let item of que.options">
+                            <input type="radio" name={{i}} value={{item}} ngModel> &nbsp; {{ item }}
+                        </div><br>
+                        <hr>
+                    </div>
+
+
+                    <div *ngSwitchCase="'multiple'">
+                        <div *ngFor="let item of que.options;let j = index">
+                            <input type="checkbox" name="checkbox" value={{item}} ngModel> &nbsp; {{ item }}
+                        </div><br>
+                    </div>
+                </div>
+                <br>
+                <input type="checkbox" name="decleration" id="decleration" checked> Send Response Copy to Me <br>
+                <button type="submit" class="btn btn-primary">Final Submit</button>
+            </form>
+
+        </div>
     </div>
+
 </div>
-
-
 
 
 

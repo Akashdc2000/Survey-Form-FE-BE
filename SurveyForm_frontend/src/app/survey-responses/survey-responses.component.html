@@ -5,6 +5,7 @@
         <div class="card-body">
             <h3 class="card-title text-center">{{data.Responses[0].title}}</h3>
             <hr>
+            <button class="btn btn-primary" (click)="downloadCSV()">Download Responses</button><hr>
             <div *ngFor="let array of data.Responses">
                 <h3>Response Submitted by <u> <{{array.email}}> </u></h3>
                 <div *ngFor="let que of array.survey">
@@ -13,6 +14,7 @@
                 </div>
                 <hr>
             </div>
+            
         </div>
     </div>
 

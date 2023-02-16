@@ -3,10 +3,16 @@
 //     margin: 5px;
 // }
 
-
+.body{
+    background-color: #92bdf8;
+}
 .card{
     
     width: 60%;
     margin: auto;
-
+    
+}
+.card-body{
+    box-shadow: 2px 2px 15px black;
+    border-radius: 10px;
 }

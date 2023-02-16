@@ -27,12 +27,12 @@ const register = async (request, response) => {
             if (error)
                 response.send(error);
             else
-                response.status(200).json({ message: 'Registration Successful..' ,data:doc})
+                response.status(201).json({ message: 'Registration Successful..' ,data:doc})
         })
 
 
     } catch (error) {
-        response.status(201).json({message:"Something went Wrong !!!!"})
+        response.status(400).json({message:"Something went Wrong !!!!"})
     }
 }
 
@@ -57,16 +57,16 @@ const login = async (request, response) => {
 
     const existingUser = await userModel.findOne({ email: email })
     if (!existingUser) {
-        return response.status(200).json({ message: 'User Not exists' });
+        return response.status(403).json({ message: 'User Not exists' });
     }
 
     const matchPassword = await bcrypt.compare(password, existingUser.password);
     if (!matchPassword) {
-        return response.status(200).json({ message: 'Invalid Credentials' });
+        return response.status(403).json({ message: 'Invalid Credentials' });
     }
     //Generate Token
     let token= await generateToken(request);
-    console.log(token)
+    // console.log(token)
     response.status(200).json({ message: "authorized",token:token })
 }
 
@@ -89,9 +89,9 @@ const update = async (request, response) => {
     const id = request.params._id
     try {
         userModel.findByIdAndUpdate(id, user, (error, doc) => {
-            if (error) response.status(404).json(error)
+            if (error) response.status(400).json(error)
             if (!doc)
-                response.status(404).json({ message: "User Not Present in Database...." })
+                response.status(403).json({ message: "User Not Present in Database...." })
             else
                 response.status(200).json({
                     message: `Following User Updated Succesfully...`,
@@ -100,7 +100,7 @@ const update = async (request, response) => {
         });
 
     } catch (error) {
-        response.status(404).json({ message: "User Not Present in Database...." })
+        response.status(400).json({ message: "Something Went Wrong ...." })
     }
 }
 
@@ -110,9 +110,9 @@ const deleteUser = async (request, response) => {
     const id = request.params._id;
     try {
         userModel.findByIdAndDelete(id, (error, doc) => {
-            if (error) response.status(404).json(error)
+            if (error) response.status(400).json(error)
             if (!doc)
-                response.status(404).json({ message: "User Not Present in Database...." })
+                response.status(403).json({ message: "User Not Present in Database...." })
             else
                 response.status(200).json({
                     message: `Following User Deleted Succesfully...`,
@@ -121,7 +121,7 @@ const deleteUser = async (request, response) => {
         });
 
     } catch (error) {
-        response.status(404).json({ message: "User Not Present in Database...." })
+        response.status(400).json({ message: "Something Went Wrong ..." })
     }
 }
 
@@ -136,9 +136,9 @@ const getUserID = async (request, response) => {
         if(result)
             response.status(200).json({user_id:result._id})
         else
-            response.status(201).json({message:"No User ID Found "})
+            response.status(403).json({message:"No User ID Found "})
     } catch (error) {
-        response.status(200).json(error)
+        response.status(400).json(error)
     }
 }
 

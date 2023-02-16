@@ -1,24 +1,29 @@
-<!-- <mat-toolbar class="toolbar">Welcome to Survey App :)
-    <div class="basic-btn">
-      <button mat-button routerLink="/mainpage">Home</button>
-     </div>
-      <div class="basic-btn history">
-        <button mat-button (click)="/">History</button>
-      </div>
-      <div class="basic-btn logout">
-        <button mat-button >Log Out</button>
-      </div>
-   
-  </mat-toolbar> -->
+<mat-toolbar class="toolbar">Welcome to Survey App :)
+  <div class="basic-btn">
+    <button mat-button routerLink="/mainpage">Home</button>
+  </div>
+  <div class="basic-btn history">
+    <button mat-button routerLink="/history">History</button>
+  </div>
+  <div class="basic-btn logout">
+    <button mat-button (click)="logout()">Log Out</button>
+  </div>
+
+</mat-toolbar>
 
 
-<h4 class="history">{{data.message}}&nbsp; of a userid &nbsp;  {{data.Survey[0].userid}}</h4>
-<div class="card">
+
+<div class="root">
+
+  <div class="card">
+    <h4 class="history">{{data.message}}&nbsp; of a userid &nbsp; {{data.Survey[0].userid}}</h4>
     <div class="card-body" *ngFor="let survey of data.Survey">
-        <h5 class="card-title">{{survey.title}}</h5>
-        <button type="button" class="btn btn-primary" (click)="publishlink(survey._id)">Publish</button>
-        <button type="button" class="btn btn-primary" (click)="getAllResponsesBy(survey._id)">Responses</button>
-        <button type="button" class="btn btn-primary" (click)="deleteSurvey(survey._id)">Delete</button>
-        <hr>
+      <h5 class="card-title"><u>{{survey.title}}</u></h5>
+      <button type="button" class="btn btn-primary" (click)="publishlink(survey._id) ">Publish</button>
+      <button type="button" class="btn btn-primary" (click)="getAllResponsesBy(survey._id)">Responses</button>
+      <button type="button" class="btn btn-primary" (click)="deleteSurvey(survey._id)">Delete</button>
+      <hr>
     </div>
+  </div>
+
 </div>

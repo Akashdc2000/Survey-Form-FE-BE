@@ -10,13 +10,14 @@ import { LoaderComponent } from './loader/loader.component';
 
 import { SurveyResponsesComponent } from './survey-responses/survey-responses.component';
 import { CreateFormComponent } from './survey/create-form/create-form.component';
+import { ThankyouComponent } from './thankyou/thankyou.component';
 
 
 const routes: Routes = [
   // {path:'',pathMatch: 'full', redirectTo: '/signin'},
   {path:'signin',component: SigninComponent},
   {path:'register',component: RegisterComponent},
-  // {path:'mainpage',component: MainPageComponent},
+  {path:'thankyou',component: ThankyouComponent},
   {path:'dynamic/:id',component: DynamicComponent},
   {path:'history/:id',component: HistoryComponent},
   {path:'survey_responses/:id',component: SurveyResponsesComponent},

@@ -89,9 +89,12 @@ export class DynamicComponent implements OnInit {
       this.allservices.saveResponse(filldata,response._id).subscribe(res=>{
         console.log(res);
         alert(JSON.parse(JSON.stringify(res)).message);
+        setTimeout(()=>{
+          this.route.navigate(['/thankyou'])
+        },1000)
+       
       })
       
-      // this.route.navigate(['/loader']);
     })
   }
 }

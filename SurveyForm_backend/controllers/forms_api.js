@@ -1,5 +1,6 @@
 const formsModel = require('../models/forms_model')
 const userModel = require('../models/users_model')
+const responseModel=require('../models/responses_model')
 
 //Get All Survey
 const getall = async (request, response) => {
@@ -45,7 +46,7 @@ const getIndivisualSurvey = async (request, response) => {
         else
             response.status(200).json(result)
     } catch (error) {
-        response.status(201).json({message:"Something Went Wrong"})
+        response.status(400).json({ message: "Something Went Wrong" })
     }
 }
 
@@ -53,10 +54,9 @@ const getIndivisualSurvey = async (request, response) => {
 const createSurvey = async (request, response) => {
 
     const { title, email, survey } = request.body;
-    console.log('ok')
     const existingUser = await userModel.findOne({ email: email })
     if (!existingUser) {
-        response.status(401).json({ message: "You are not Authorized User" })
+        response.status(403).json({ message: "You are not Authorized User" })
     }
     else {
         const existingSurvey = await formsModel.findOne({ userid: existingUser._id, title: title })
@@ -71,7 +71,7 @@ const createSurvey = async (request, response) => {
                 if (error)
                     response.send(error);
                 else
-                    response.status(200).json({
+                    response.status(201).json({
                         message: `Survey Created...`,
                         "Response": doc
                     })
@@ -98,7 +98,7 @@ const updateSurvey = async (request, response) => {
     const id = request.params._id
     try {
         formsModel.findByIdAndUpdate(id, updatedSurvey, (error, doc) => {
-            if (error) response.status(404).json(error)
+            if (error) response.status(400).json(error)
             if (!doc)
                 response.status(404).json({ message: "Survey Not Present in Database...." })
             else
@@ -109,7 +109,7 @@ const updateSurvey = async (request, response) => {
         });
 
     } catch (error) {
-        response.status(404).json({ message: "Survey Not Present in Database...." })
+        response.status(400).json({ message: "Something Went Wrong ..." })
     }
 
 }
@@ -122,18 +122,26 @@ const deleteSurvey = async (request, response) => {
     const id = request.params._id;
     try {
         formsModel.findByIdAndDelete(id, (error, doc) => {
-            if (error) response.status(404).json(error)
+            if (error) response.status(400).json(error)
             if (!doc)
                 response.status(404).json({ message: "Survey Not Present in Database...." })
-            else
+            else {
+                //We also deleted all responses releted to given survey ID
+                responseModel.deleteMany({survey_id:id},(error,doc)=>{
+                    console.log("All Responses Deleted for given Survey ID....")
+                })
+
                 response.status(200).json({
                     message: `Following Survey Deleted Succesfully...`,
                     "Survey": doc
                 })
+
+            }
+
         });
 
     } catch (error) {
-        response.status(404).json({ message: "Survey Not Present in Database...." })
+        response.status(400).json({ message: "Something Went Wrong ...." })
     }
 }
 
@@ -141,17 +149,17 @@ const deleteSurvey = async (request, response) => {
 //Get Survey ID
 const getSurveyID = async (request, response) => {
     try {
-        const {title,email} = request.body;
-        const result = await formsModel.findOne({ title:title,email:email });
+        const { title, email } = request.body;
+        const result = await formsModel.findOne({ title: title, email: email });
         if (result.length <= 0)
             response.status(404).json({ message: "No Survey Found..." })
         else
-            response.status(200).json({"survey_id":result._id})
+            response.status(200).json({ "survey_id": result._id })
     } catch (error) {
-        response.status(201).json({message:"Something Went Wrong"})
+        response.status(400).json({ message: "Something Went Wrong" })
     }
 }
 
 module.exports = {
-    getall, createSurvey, getSurvey, deleteSurvey, updateSurvey, getIndivisualSurvey,getSurveyID
+    getall, createSurvey, getSurvey, deleteSurvey, updateSurvey, getIndivisualSurvey, getSurveyID
 }

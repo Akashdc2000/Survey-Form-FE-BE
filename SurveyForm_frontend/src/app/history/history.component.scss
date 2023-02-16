@@ -1,12 +1,42 @@
 .history {
     text-align: center;
 }
-
+.card-body{
+   background-color: white;
+   border-radius: 20px  ;
+   margin-bottom: 10px;
+   box-shadow: 10px 5px 5px black;
+}
 .card {
     align-items: center;
     text-align: center;
+    
+    background-color: #92bdf8;
 }
 
 .btn {
-    margin-right: 10px;
+    margin-right: 50px;
+}
+
+.toolbar {
+    background-color: #0E47BA;
+    color: white;
+    height: 50px;
+    margin: auto;
+}
+
+.basic-btn {
+    margin-left: 48em;
+    margin-right: 0%;
+    // min-width: 100px;
+}
+
+.history {
+    margin-left: 40px;
+    margin-right: 0%;
+}
+
+.logout {
+    margin-left: 40px;
+
 }

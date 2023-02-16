@@ -12,10 +12,13 @@ const app = express()
 app.use(cors());
 app.use(express.json())
 
-//Routers
+//Define Routers
 app.use('/users', users); 
 app.use('/survey',forms)
 app.use('/responses', responses)
+
+
+//Connection to Database
 
 mongoose.connect('mongodb://localhost:27017/survey_database')
     .then(() => {

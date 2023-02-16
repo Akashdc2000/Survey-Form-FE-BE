@@ -29,7 +29,7 @@ const auth = async (request, response, next) => {
         next() 
     } catch (error) {
         console.log("error1")
-        response.status(200).json({message:"You are not authorized..."})
+        response.status(401).json({message:"You are not authorized..."})
     }
     
 }

@@ -66,7 +66,7 @@ export class CreateFormComponent implements OnInit{
 
   mainForm = [
     'Title',
-    'Email',
+    'Email'
   ];
 
   drop(event: CdkDragDrop<any>) {

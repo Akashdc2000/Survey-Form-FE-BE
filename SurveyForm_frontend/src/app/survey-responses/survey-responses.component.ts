@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ngxCsv } from 'ngx-csv';
 import { AllservicesService } from '../allservices.service';
 
 
@@ -17,8 +18,8 @@ export interface Respons {
 }
 
 export class ResponsesRootObject {
-  message: string='';
-  Responses: Respons[]=[];
+  message: string = '';
+  Responses: Respons[] = [];
 }
 
 @Component({
@@ -37,8 +38,8 @@ export class SurveyResponsesComponent implements OnInit {
   ) {
   }
   ngOnInit(): void {
-    if(!localStorage.getItem('token'))
-        this.route.navigate(['/signin']);
+    if (!localStorage.getItem('token'))
+      this.route.navigate(['/signin']);
 
     //To get a SurveyID from URL
     this.url = (this.route.routerState.snapshot.url)
@@ -49,6 +50,36 @@ export class SurveyResponsesComponent implements OnInit {
       this.data = response;
       console.log(this.data.message)
     });
+
+  }
+
+
+  //Download CSV File...
+  downloadCSV() {
+
+    const responseObject = [] as any;
+    console.log(this.data.Responses)
+    this.data.Responses.forEach((element: any) => {
+      element.survey.forEach((ele: any) => {
+        ele.Response_ID = element._id;
+        ele.email = element.email;
+        responseObject.push(ele);
+      });
+    });
+    console.log(responseObject);
+    var option = {
+      title: 'Survey Form',
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: false,
+      noDownload: false,
+      showTitle: false,
+      useBom: false,
+      headers: ['Question', 'Answer', 'Response_ID', "Email"]
+    };
+
+    new ngxCsv(responseObject, "Responses", option);
 
   }
 

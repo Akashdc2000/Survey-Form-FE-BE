@@ -21,6 +21,7 @@
 .toolbar{
  background-color: #0E47BA;
  color: white;
+ height: 50px;
 }
 .basic-btn{
   margin-left: 48em;
@@ -38,7 +39,7 @@
 .container {
   width: 70%;
   max-width: 100%;
-  // margin: 0 25px 25px 0;
+  margin: 0 25px 25px 0;
   display: inline-block;
   vertical-align: top;
 }

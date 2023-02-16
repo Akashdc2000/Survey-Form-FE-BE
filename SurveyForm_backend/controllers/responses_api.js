@@ -17,14 +17,13 @@ const getall = async (request, response) => {
     }
 }
 
-//Get Response By a Title/Name
+//Get Response By a SurveyID
 const getResponseBySurveyId = async (request, response) => {
     try {
         const survey_id = request.params.surveyid;
         const result = await responseModel.find({ survey_id: survey_id });
         if (result.length <= 0) {
-            // console.log("no")
-            response.status(200).json({ message: "No response Found..." })
+            response.status(404).json({ message: "No response Found..." })
         }
         else
             response.status(200).json({
@@ -32,8 +31,7 @@ const getResponseBySurveyId = async (request, response) => {
                 "Responses": result
             })
     } catch (error) {
-        // console.log("catch")
-        response.status(200).json({ message: "No response Found..." })
+        response.status(400).json({ message: "Something Went Wrong ..." })
     }
 }
 
@@ -45,7 +43,7 @@ const addResponse = async (request, response) => {
 
     const existingSurvey = await formsModel.findOne({ _id: request.params._id })
     if (!existingSurvey) {
-        response.status(409).json({ message: "No Form For the given Survey ID" })
+        response.status(404).json({ message: "No Form For the given Survey ID" })
     }
     const existingResponse = await responseModel.findOne({ title: title, email: email })
     if (!existingResponse) {
@@ -66,7 +64,7 @@ const addResponse = async (request, response) => {
         })
     }
     else {
-        response.status(200).json({ message: "Response already Submitted.." })
+        response.status(409).json({ message: "Response already Submitted.." })
     }
 
 
@@ -92,7 +90,7 @@ const updateResponse = async (request, response) => {
                 "Responses": updatedResponse
             })
     } catch (error) {
-        response.status(404).json({ message: "error" })
+        response.status(400).json({ message: "error" })
     }
 
 }
@@ -105,7 +103,7 @@ const deleteResponse = async (request, response) => {
     const id = request.params._id;
     try {
         responseModel.findByIdAndDelete(id, (error, doc) => {
-            if (error) response.status(404).json(error)
+            if (error) response.status(400).json(error)
             if (!doc)
                 response.status(404).json({ message: "Response Not Present in Database...." })
             else
@@ -116,7 +114,7 @@ const deleteResponse = async (request, response) => {
         });
 
     } catch (error) {
-        response.status(404).json({ message: "Response Not Present in Database...." })
+        response.status(400).json({ message: "Something Went Wrong ..." })
     }
 }
 
@@ -135,11 +133,7 @@ const getResponseID = async (request, response) => {
     }
 }
 
-//Get a Response Structure...
 
-const responseFillingForm = async (request, response) => {
-    
-}
 
 module.exports = {
     getall, addResponse, getResponseBySurveyId, deleteResponse, updateResponse, getResponseID

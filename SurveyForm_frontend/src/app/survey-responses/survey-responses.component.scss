@@ -1,17 +1,18 @@
 .card{
     width: 70%;
     margin: auto;
-    background-color: papayawhip;
+    background-color: white;
     border: 2px solid rgb(198, 17, 17);
     border-radius: 50px;
 }
 .parent{
-    background-color: rgba(184, 150, 150, 0.647);
-}
-body{
-    background-color: red;
+    background-color: #92bdf8;
 }
 
+.downloadbtn{
+    align-items: center;
+    justify-content: center;
+}
 h3{
     color: black;
 }

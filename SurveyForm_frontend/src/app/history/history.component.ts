@@ -141,4 +141,10 @@ export class HistoryComponent implements OnInit{
       
   }
 
+  logout()
+  {
+    localStorage.clear();
+    this.route.navigate(['/signin']) 
+  }
+
 }

@@ -39,6 +39,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { ThankyouComponent } from './thankyou/thankyou.component';
 
 
 
@@ -61,7 +62,8 @@ import { MatCardModule } from '@angular/material/card';
     MultipleCorrectComponent,
     SingleCorrectComponent,
     ShortAnsComponent,
-    CreateFormComponent
+    CreateFormComponent,
+    ThankyouComponent
 
   ],
   imports: [
