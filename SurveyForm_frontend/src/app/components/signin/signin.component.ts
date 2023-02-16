@@ -29,6 +29,7 @@ export class SigninComponent {
         if(response.message=="authorized")
         {
           localStorage.setItem('token',response.token)
+          localStorage.setItem('email',this.email)
           console.log(response.token)
           alert("Login Successfully Done")
           this.router.navigate(['/mainpage']);

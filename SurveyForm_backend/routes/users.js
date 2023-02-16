@@ -15,6 +15,6 @@ router.post('/login', login)
 router.put('/update/:_id', update)
 router.delete('/delete/:_id', deleteUser)
 
-router.post('/get',auth, getUserID)
+router.post('/get', getUserID)
 
 module.exports = router;

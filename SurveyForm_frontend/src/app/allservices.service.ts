@@ -46,13 +46,13 @@ export class AllservicesService {
 
 
   //Get a User ID By its Email...
-  getUserIDByEmail() {
+  getUserIDByEmail(email:any) {
     let token=localStorage.getItem('token');
     let httpHeaders = new HttpHeaders({
       'content-Type': 'application/json',
       'authorization': ""+token
     })
-    return this.httpClient.post('http://localhost:7777/users/get',
+    return this.httpClient.post('http://localhost:7777/users/get',{email:email},
       { headers: httpHeaders })
   }
 

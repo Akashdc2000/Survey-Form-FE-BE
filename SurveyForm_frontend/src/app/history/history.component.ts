@@ -78,7 +78,7 @@ export class HistoryComponent implements OnInit{
 
   //Get All Responses
   getAllResponsesBy(survey_id:any){
-    this.downloadByCSV(survey_id);
+    // this.downloadByCSV(survey_id);
     alert("All Responses of Survey ID "+survey_id)
     window.open(`http://localhost:4200/survey_responses/${survey_id}`)
   }

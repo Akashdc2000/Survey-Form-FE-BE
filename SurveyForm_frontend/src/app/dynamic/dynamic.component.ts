@@ -1,18 +1,19 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, ɵgetUnknownElementStrictMode } from '@angular/core';
 
-import { FormBuilder, NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AllservicesService } from '../allservices.service';
 
-export interface Survey {
-  question: string;
-  answertype: string;
-  options: string[];
+export class Survey {
+  question: any;
+  answertype: any;
+  options: string[]=[];
 }
 
 export class RootObject {
   title: string = "";
   email: string = "";
+  _id:string="";
   survey: Survey[] = [];
 }
 
@@ -27,9 +28,13 @@ export class RootObject {
 export class DynamicComponent implements OnInit {
 
   public data: any;
+
   public url: string = '';
   public surveyID: String = '';
-  dynamicForm = this.fb.group({})
+  // dynamicForm = this.fb.group({
+  //   email:new FormControl('')
+  // })
+  email=""
 
   constructor(
     public allservices: AllservicesService,
@@ -54,23 +59,39 @@ export class DynamicComponent implements OnInit {
 
 
   }
-
   
   saveForm(form:NgForm) {
     //console.log(this.dynamicForm.value)
     this.allservices.getSurveyStructure(this.surveyID).subscribe((response:RootObject)=>{
       let question=response.survey;
-      console.log(question)
-      console.log(form.value)
+      // console.log(response)
+      // console.log(form.value)
+      //To convert Object into array
       let answer=Object.entries(form.value)
-    
-      let i=0;
-    
-      // question.forEach(que => {
-      //   que.options=answer[i]
-      //   i=i+1;
-      // });
       console.log(answer)
+      let filldata={
+        title:response.title,
+        email:this.email,
+        survey:[{}]
+      }
+      let i=0;
+      question.forEach(que => {
+        let q={
+          question:que.question,
+          answer:answer[i++][1]
+        }
+        filldata.survey.push(q)
+      });
+      filldata.survey.shift();
+      console.log(filldata);
+      
+      console.log(response._id);
+      this.allservices.saveResponse(filldata,response._id).subscribe(res=>{
+        console.log(res);
+        alert(JSON.parse(JSON.stringify(res)).message);
+      })
+      
+      // this.route.navigate(['/loader']);
     })
   }
 }

@@ -2,7 +2,11 @@
 <div class="card">
     <div class="card-body">
         <h3 class="card-title text-center">{{data.title}}</h3><br><br>
+        <form >
+            <input type="email" [(ngModel)]="email" name="email" id="email" placeholder="Enter Your Email Here"><hr>
+        </form>
         <form #form="ngForm" (ngSubmit)="saveForm(form)" novalidate>
+            
             <div class="field" *ngFor="let que of data.survey;let i=index" [ngSwitch]="que.answertype">
                 <div>
                     <h3 ngModel class="card-text">{{que.question}}</h3>

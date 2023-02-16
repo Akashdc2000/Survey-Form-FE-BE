@@ -1,3 +1,17 @@
+<!-- <mat-toolbar class="toolbar">Welcome to Survey App :)
+    <div class="basic-btn">
+      <button mat-button routerLink="/mainpage">Home</button>
+     </div>
+      <div class="basic-btn history">
+        <button mat-button (click)="/">History</button>
+      </div>
+      <div class="basic-btn logout">
+        <button mat-button >Log Out</button>
+      </div>
+   
+  </mat-toolbar> -->
+
+
 <h4 class="history">{{data.message}}&nbsp; of a userid &nbsp;  {{data.Survey[0].userid}}</h4>
 <div class="card">
     <div class="card-body" *ngFor="let survey of data.Survey">

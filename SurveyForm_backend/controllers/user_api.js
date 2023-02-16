@@ -132,7 +132,7 @@ const getUserID = async (request, response) => {
 
 
     try {
-        const result = await userModel.findOne({email:request.user.email});
+        const result = await userModel.findOne({email:request.body.email});
         if(result)
             response.status(200).json({user_id:result._id})
         else

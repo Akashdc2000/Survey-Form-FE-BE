@@ -184,6 +184,9 @@ export class CreateFormComponent implements OnInit{
     // // Store formData in the database
    this.allservices.createSurvey(jsonobj).subscribe(response=>{
     console.log(response);
+    alert("Survey Created Successfully....");
+    location.reload();
+
    })
 
   }
@@ -191,9 +194,11 @@ export class CreateFormComponent implements OnInit{
 
   history()
   {
-
-      this.allservices.getUserIDByEmail().subscribe(response=>{
-        console.log(response)
+      let email=localStorage.getItem('email')
+      this.allservices.getUserIDByEmail(email).subscribe(response=>{
+        console.log(JSON.parse(JSON.stringify(response)).user_id)
+        let user_id=JSON.parse(JSON.stringify(response)).user_id;
+        this.router.navigate([`/history/${user_id}`])
       })
   }
 
