@@ -53,6 +53,8 @@ export class CreateFormComponent implements OnInit{
   ngOnInit(): void {
     if(!localStorage.getItem('token'))
       this.router.navigate(['/signin']);
+    else
+      this.router.navigate(['/mainpage'])
   }
 
   formElements = [
@@ -115,6 +117,11 @@ export class CreateFormComponent implements OnInit{
   multipleCorrectComponent!: MultipleCorrectComponent;
 
   onFormSubmit() {
+
+    if(localStorage.getItem('email')!==this.emailComponent.getValue()){
+      alert("Please enter your Current login Email..");
+      return;
+    }
     //root object
     let jsonobj: RootObject = new RootObject('', '', []);
 

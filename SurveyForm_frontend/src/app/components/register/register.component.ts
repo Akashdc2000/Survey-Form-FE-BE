@@ -23,20 +23,28 @@ export class RegisterComponent implements OnInit {
     password: new FormControl(""),
     rpwd: new FormControl(""),
   });
-
+  
   registerSubmitted() {
     //console.log(typeof this.registerForm.value);
     try {
-      this.allservices.registerUser(this.registerForm.value).subscribe(data => {
-        console.log(data)
-        let result = (JSON.parse(JSON.stringify(data)).message)
-        if (result == "Registration Successful..")
-          this.router.navigate(['/signin']);
-        else
-          this.router.navigate(['/register']);
-        alert(result)
-      })
-
+      let user = this.registerForm.value;
+      const validateEmail = (email:any) => /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)
+      
+      if(!validateEmail(user.email))
+        alert("Invalid Email..")
+      if (user.password !== user.rpwd) {
+        alert("Please Check Your Password and Confirm Password!!!")
+      } else {
+        this.allservices.registerUser(this.registerForm.value).subscribe(data => {
+          console.log(data)
+          let result = (JSON.parse(JSON.stringify(data)).message)
+          if (result == "Registration Successful..")
+            this.router.navigate(['/signin']);
+          else
+            this.router.navigate(['/register']);
+          alert(result)
+        })
+      }
     } catch (error) {
       console.log(error)
     }
@@ -52,8 +60,8 @@ export class RegisterComponent implements OnInit {
 
     //       this.allservices.getSurveyStructure(survey_id).subscribe(data=>{
     //         console.log(JSON.parse(JSON.stringify(data)).survey[0].question);
-    
-    
+
+
     //         (JSON.parse(JSON.stringify(data)).survey).forEach((que:any) => {
     //             console.log(que.question,que.answertype,que.options)
     //             que.options.forEach((opt:any) => {
@@ -64,7 +72,7 @@ export class RegisterComponent implements OnInit {
     //    })
 
     // } catch (error) {
-      
+
     // }
 
   }

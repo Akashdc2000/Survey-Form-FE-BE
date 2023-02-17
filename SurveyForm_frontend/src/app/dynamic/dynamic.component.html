@@ -31,7 +31,7 @@
 
                     <div *ngSwitchCase="'multiple'">
                         <div *ngFor="let item of que.options;let j = index">
-                            <input type="checkbox" name="checkbox" value={{item}} ngModel> &nbsp; {{ item }}
+                            <input type="checkbox" name="checkbox" value={{item}} ngModel (change)="onChange($event)"> &nbsp; {{ item }}
                         </div><br>
                     </div>
                 </div>

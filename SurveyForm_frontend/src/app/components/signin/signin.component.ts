@@ -18,6 +18,10 @@ export class SigninComponent {
   password = '';
 
   ngOnInit() {
+    if(!localStorage.getItem('token'))
+      this.router.navigate(['/signin']);
+    else
+      this.router.navigate(['/mainpage'])
 
   }
   async logInUser() {

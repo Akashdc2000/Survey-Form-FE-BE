@@ -28,7 +28,7 @@ export class RootObject {
 export class DynamicComponent implements OnInit {
 
   public data: any;
-
+  public checkedvalue=new Set()
   public url: string = '';
   public surveyID: String = '';
   // dynamicForm = this.fb.group({
@@ -59,8 +59,17 @@ export class DynamicComponent implements OnInit {
 
 
   }
+  onChange(event:any){
+    this.checkedvalue.add(event.target.value);
+  }
   
   saveForm(form:NgForm) {
+    const validateEmail = (email:any) => /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)
+    if(!validateEmail(this.email))
+    {
+      alert("Check Email Again..")
+      return;
+    }
     //console.log(this.dynamicForm.value)
     this.allservices.getSurveyStructure(this.surveyID).subscribe((response:RootObject)=>{
       let question=response.survey;
@@ -68,6 +77,12 @@ export class DynamicComponent implements OnInit {
       // console.log(form.value)
       //To convert Object into array
       let answer=Object.entries(form.value)
+      
+      answer.forEach(element => {
+        if(element[1]===true)
+          element[1]= Array.from(this.checkedvalue).join(',')
+      });
+
       console.log(answer)
       let filldata={
         title:response.title,
@@ -86,12 +101,20 @@ export class DynamicComponent implements OnInit {
       console.log(filldata);
       
       console.log(response._id);
+
+      //Add Response to Database
       this.allservices.saveResponse(filldata,response._id).subscribe(res=>{
-        console.log(res);
-        alert(JSON.parse(JSON.stringify(res)).message);
+        try {
+          alert(JSON.parse(JSON.stringify(res)).message);
+          
+        } catch (error) {
+          console.log("Error")
+          alert("Response already Submitted with same Email ID..")
+        }
+        
         setTimeout(()=>{
           this.route.navigate(['/thankyou'])
-        },1000)
+        },500)
        
       })
       
